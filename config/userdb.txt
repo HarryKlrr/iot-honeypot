@@ -1,0 +1,18 @@
+# Cowrie authentication policy (etc/userdb.txt)
+#
+# Format: <username>:<uid/unused>:<password>
+#   A leading '!' denies a pattern; '*' matches anything.
+#   Processing stops on the first match, so specific ACCEPT rules are
+#   listed before the catch-all REJECT.
+#
+# This deployment deliberately accepts only three high-value IoT default
+# credential pairs (all of which appear in the Mirai botnet dictionary) and
+# rejects everything else. Against the 200-pair test wordlist (10 users x 20
+# passwords) this yields exactly 3 successful logins per full pass — the
+# documented ~1.6% acceptance rate, which also serves as a correctness check
+# on the honeypot's authentication logic.
+
+root:0:root
+admin:0:admin
+admin:0:1234
+!*:*:*
