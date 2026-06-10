@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+cowrie-env/
+
+# Analysis outputs (regenerate from data) — keep results/ curated copies only
+*.tmp
+
+# Raw / sensitive capture data — do NOT commit real captures with live IPs
+data/*.json
+!data/sample/cowrie_sample.json
+*.log
+var/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
