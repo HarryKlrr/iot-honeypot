@@ -1,0 +1,12 @@
+{"eventid": "cowrie.session.connect", "timestamp": "2026-03-14T09:12:01.001Z", "src_ip": "192.168.56.20", "session": "s0000001"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:01.450Z", "username": "root", "password": "xc3511", "src_ip": "192.168.56.20", "session": "s0000001"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:01.902Z", "username": "root", "password": "vizxv", "src_ip": "192.168.56.20", "session": "s0000001"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:02.310Z", "username": "admin", "password": "admin", "src_ip": "192.168.56.20", "session": "s0000001"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:02.770Z", "username": "admin", "password": "888888", "src_ip": "192.168.56.20", "session": "s0000001"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:03.140Z", "username": "ubnt", "password": "ubnt", "src_ip": "192.168.56.20", "session": "s0000002"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:03.600Z", "username": "support", "password": "support", "src_ip": "192.168.56.20", "session": "s0000002"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:04.050Z", "username": "pi", "password": "raspberry", "src_ip": "192.168.56.21", "session": "s0000003"}
+{"eventid": "cowrie.login.failed", "timestamp": "2026-03-14T09:12:04.500Z", "username": "guest", "password": "12345", "src_ip": "192.168.56.21", "session": "s0000003"}
+{"eventid": "cowrie.login.success", "timestamp": "2026-03-14T09:12:05.010Z", "username": "root", "password": "1234", "src_ip": "192.168.56.20", "session": "s0000004"}
+{"eventid": "cowrie.command.input", "timestamp": "2026-03-14T09:12:06.220Z", "input": "uname -a", "src_ip": "192.168.56.20", "session": "s0000004"}
+{"eventid": "cowrie.command.input", "timestamp": "2026-03-14T09:12:06.880Z", "input": "cat /proc/cpuinfo", "src_ip": "192.168.56.20", "session": "s0000004"}
