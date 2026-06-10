@@ -1,0 +1,10 @@
+root
+admin
+user
+guest
+support
+service
+ubnt
+1234
+default
+pi
