@@ -145,9 +145,9 @@ iot-honeypot/
 │   └── enhanced_credential_analyzer.py   # Python analysis & visualisation pipeline
 │
 ├── data/                             # Log inputs (see data/README.md)
-│   ├── README.md                     # Expected schema + sanitisation policy
+│   ├── README.md                     # Log schema and sample record
 │   └── sample/
-│       └── cowrie_sample.json        # Small synthetic sample for reproducibility
+│       └── cowrie_sample.json        # Sample Cowrie log
 │
 ├── results/                          # Generated charts & analyst output
 │   └── README.md
@@ -235,4 +235,3 @@ Portfolio: [harryklrr.github.io](https://harryklrr.github.io) · GitHub: [@Harry
 ## License
 
 Released under the [MIT License](LICENSE).
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           

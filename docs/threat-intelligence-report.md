@@ -237,4 +237,3 @@ The cross-run comparison below confirms the sensor's reliability: doubling the a
 
 ### Appendix B — Note on totals
 The headline **552** figure is the primary SSH dataset (Runs 1 + 2). A third reproducibility run (340 attempts) brings the three-run total to **892**; both figures appear in the source study. All interpretive conclusions hold under either total.
-                                                                                                                                                                                                                                                    
