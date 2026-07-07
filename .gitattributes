@@ -1,0 +1,11 @@
+# Force LF line endings for text so GitHub renders Markdown correctly
+* text=auto eol=lf
+*.md   text eol=lf
+*.py   text eol=lf
+*.txt  text eol=lf
+*.cfg  text eol=lf
+*.json text eol=lf
+# Treat images as binary
+*.png binary
+*.jpg binary
+*.zip binary
