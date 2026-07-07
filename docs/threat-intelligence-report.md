@@ -108,6 +108,10 @@ root:root     admin:admin     admin:1234
 
 **Assessment:** The composition of this dictionary is itself an indicator. An attacker testing `xc3511` and `vizxv` is running IoT-botnet tooling, not a generic credential-stuffing kit. The concentration of attempts onto a small set of manufacturer defaults — and the exact overlap with the Mirai source dictionary — gives high analyst confidence that the modelled adversary is automated botnet propagation.
 
+![SSH brute-force analysis — Run 1](../results/credential_analysis_run_1.png)
+
+*Run 1 (184 attempts): near-uniform username distribution, `root`/`admin` leading the passwords, the 98.4% / 1.6% split, single source `192.168.56.10`, and 1–5 attempts per session — the signature of parallel-threaded automated tooling.*
+
 ---
 
 ## 4. Attack Frequency & Timeline
@@ -116,7 +120,7 @@ The temporal signature reinforces the automation hypothesis:
 
 - **Run 1** completed in a **sub-minute burst** (~0.8 min) — a single rapid pass through the wordlist, characteristic of a scanning agent that tries each credential once per host and moves on.
 - **Run 2** ran **~35 minutes**: an initial high-rate spike followed by a sustained lower-frequency tail. This reflects **Hydra's adaptive throttling** after it hit connection limits — behaviour that mirrors real botnet credential-stuffing, where agents slow down to avoid tripping rate-limiting defences.
-- **Session structure:** Hydra's four-thread parallelism produced sessions of **1–5 authentication attempts each, most with exactly 5**. This is the fingerprint of automated, parallel-threaded credential testing — not interactive human access, which would show longer, irregular sessions with pauses.
+- **Session structure:** Hydra's four-thread parallelism produced sessions of **1–5 authentication attempts each, most with exactly 5**. This is the fingerprint of automated, parallel-threaded credential testing — not interactive human access.
 
 Mapping to **MITRE ATT&CK**: **T1110 – Brute Force** (T1110.001 Password Guessing), progressing toward **T1078 – Valid Accounts** once a default credential succeeds.
 
@@ -143,6 +147,10 @@ while read ip; do curl -s "https://ipinfo.io/$ip?token=$TOKEN" \
 ## 6. Network Reconnaissance (Scenario 1)
 
 Nmap service-version scans (`-sV -p- -T4`) were run three times against the sensor. Cowrie correctly presented its emulated SSH (22) and Telnet (23) services on every run.
+
+![Nmap service-version scan](screenshots/nmap_scan.png)
+
+*Nmap fingerprints Cowrie's emulated SSH and Telnet on their expected ports — the same profile that would lead a real botnet to progress to credential exploitation.*
 
 | Run | Events logged | Ports detected | Dominant event |
 |---:|---:|---|---|
@@ -171,6 +179,10 @@ Nikto (vulnerability signatures) and Dirb (directory enumeration) were run again
 | Tool attribution — Generic | 60.3% |
 | Tool attribution — Dirb | 28.2% |
 | Tool attribution — Nikto | 11.5% |
+
+![Web attack analysis — Run 1](../results/web_analysis_run_1.png)
+
+*Six-panel web dashboard (Run 1): top paths, status-code distribution (dominated by 404), Nikto/Dirb tool attribution, request timeline, HTTP methods, and error rate.*
 
 **Top requested paths:** `/` (77), `/index.php` (5), `/device/this.LCDispatcher` (5), `/admin/` (4), then a long tail of `/database.sql`, `/page.cmd`, `/install.php`, `/README`, `/docs/`, `/localstart.asp` (3 each). The presence of `/device/this.LCDispatcher` (a Lexmark printer management path) shows Nikto's signature set includes IoT-specific checks, not just generic web-app probes.
 
@@ -210,12 +222,19 @@ Observation of `xc3511` or `vizxv` in particular is, in practice, almost exclusi
 
 This controlled honeypot study provides a reproducible, empirical demonstration of how exposed IoT services are attacked: automatically, relentlessly, and with a credential dictionary lifted straight from Mirai. The 98.4% failure rate reflects the honeypot's hardened authentication policy, not a lack of attacker effort — on a real device shipping with any of these defaults, the **1.6% that succeeded would have been a full compromise**. The credential concentration, the burst-then-throttle timing, the parallel-threaded session structure, and the Mirai dictionary overlap together characterise the modelled adversary and directly justify the hardening recommendations above.
 
+The cross-run comparison below confirms the sensor's reliability: doubling the attack volume doubled the logged attempts at an unchanged success rate.
+
+![SSH cross-run comparison](../results/run_comparison_ssh.png)
+
+*Run 1 vs Run 2: total attempts scale proportionally (184 → 368) while the success rate holds at 1.6% — evidence of deterministic, linear logging behaviour under load.*
+
 ---
 
 ### Appendix A — Data Sources & Reproducibility
 - Telemetry: Cowrie JSON (`var/log/cowrie/cowrie.json`) + `tcpdump` HTTP capture (Scenario 3).
 - Analysis: [`analysis/enhanced_credential_analyzer.py`](../analysis/enhanced_credential_analyzer.py).
 - Configuration: [`config/`](../config/) · Dictionaries: [`wordlists/`](../wordlists/).
+- Charts: [`results/`](../results/) · Evidence screenshots: [`docs/screenshots/`](screenshots/) · Diagrams: [`docs/diagrams/`](diagrams/).
 - Source study: BSc FYP, "Lightweight IoT Honeypot for Behavioural Analysis in Home and SME Environments" (Nottingham Trent University, 2026).
 
 ### Appendix B — Note on totals

@@ -79,6 +79,10 @@ Across the capture window the honeypot logged **552 authentication attempts** ag
 
 The Host-Only adapter guarantees the honeypot **cannot reach the public internet**, so captured activity is contained and the lab carries no risk to third parties.
 
+![System architecture](docs/diagrams/system_architecture.png)
+
+*High-level system architecture: isolated attack, honeypot, and analysis layers.*
+
 ---
 
 ## Methodology
@@ -188,13 +192,25 @@ The script ingests Cowrie JSON, prints summary statistics, and writes the visual
 
 ## Results
 
-The analysis pipeline produces:
+### SSH brute-force analysis
 
-- **Top-10 attempted usernames** and **top-10 attempted passwords** (bar charts)
-- **Success vs. failure** breakdown (1.6% / 98.4%)
-- **Attack timeline** — attempts per minute, exposing burst behaviour
-- **Top source IPs** and **per-session attempt distribution**
-- **Web probing analysis** — requested paths, HTTP status codes, and tool fingerprinting (Nikto vs. Dirb)
+![SSH brute-force analysis — Run 1](results/credential_analysis_run_1.png)
+
+*Six-panel SSH dashboard (Run 1, 184 attempts): top usernames, top passwords, the 98.4% / 1.6% success split, attack timeline, source-IP distribution, and per-session attempt distribution. The near-uniform username counts and the concentration on IoT default passwords are the fingerprint of automated, dictionary-driven brute forcing.*
+
+### Web probing analysis
+
+![Web attack analysis — Run 1](results/web_analysis_run_1.png)
+
+*Six-panel web dashboard (Run 1): top requested paths, HTTP status-code distribution (99.1% errors), Nikto/Dirb tool attribution, request timeline, HTTP methods, and error rate.*
+
+### Cross-run reproducibility
+
+![SSH cross-run comparison](results/run_comparison_ssh.png)
+
+*Run 1 vs Run 2 scale proportionally (184 → 368 attempts) at a constant 1.6% success rate — evidence the honeypot logs deterministically under increasing load.*
+
+Additional charts (`credential_analysis_run_2.png`, `web_analysis_run_2.png`, `run_comparison_web.png`, analyzer console output) are in [`results/`](results/). Evidence screenshots (Nmap, Hydra, tcpdump) and architecture diagrams are in [`docs/screenshots/`](docs/screenshots/) and [`docs/diagrams/`](docs/diagrams/).
 
 See [`docs/threat-intelligence-report.md`](docs/threat-intelligence-report.md) for the interpreted findings and defensive recommendations.
 
