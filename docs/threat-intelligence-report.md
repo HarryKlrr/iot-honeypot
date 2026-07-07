@@ -140,8 +140,6 @@ while read ip; do curl -s "https://ipinfo.io/$ip?token=$TOKEN" \
   | jq -r '[.ip,.country,.org] | @csv'; done < src_ips.txt > geo.csv
 ```
 
-> **Honesty note:** Presenting the single lab source accurately (rather than implying worldwide geolocation) is the defensible choice for a report shown to employers — reviewers can see the methodology is sound and would scale to live data.
-
 ---
 
 ## 6. Network Reconnaissance (Scenario 1)
@@ -239,3 +237,4 @@ The cross-run comparison below confirms the sensor's reliability: doubling the a
 
 ### Appendix B — Note on totals
 The headline **552** figure is the primary SSH dataset (Runs 1 + 2). A third reproducibility run (340 attempts) brings the three-run total to **892**; both figures appear in the source study. All interpretive conclusions hold under either total.
+                                                                                                                                                                                                                                                    

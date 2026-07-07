@@ -119,9 +119,7 @@ The work followed a five-phase pipeline. Full detail is in [`docs/methodology.md
 - **Web probing:** ~12,828 HTTP requests/run from Nikto + Dirb at a **99.1% error rate** — a complete inventory of the admin endpoints and vulnerability signatures automated infrastructure currently targets.
 - **Reconnaissance:** Nmap `-sV` scans correctly fingerprinted the emulated SSH (22) and Telnet (23) services across all runs.
 
-> **Environment note:** All traffic originated from a single isolated lab source (`192.168.56.10`) — the study is a controlled, ethically-contained simulation, not an internet-facing capture. Geographic attribution is documented as a GeoIP method for live deployment (a stated future-work item), not claimed as a finding.
-
-Visual outputs (top credentials, success/failure split, attack timeline, source-IP distribution) are produced by the analysis script and saved to [`results/`](results/).
+All captured traffic originated from a single isolated lab source (`192.168.56.10`); this is a controlled, contained study rather than an internet-facing capture, so geographic attribution is treated as a method for live deployment rather than a finding.
 
 ---
 
@@ -179,14 +177,11 @@ python3 -m venv venv && source venv/bin/activate
 # Dependencies
 pip install -r requirements.txt
 
-# Run against your Cowrie JSON logs
-# (a small synthetic sample is provided in data/sample/)
+# Run against the Cowrie JSON logs (a sample log is in data/sample/)
 python3 analysis/enhanced_credential_analyzer.py
 ```
 
-The script ingests Cowrie JSON, prints summary statistics, and writes the visualisations to the working directory / [`results/`](results/).
-
-> **Note:** Place your own `cowrie.json` capture in `data/` and point the script at it to reproduce the full dataset. The committed sample is **synthetic** and exists only so reviewers can run the pipeline end-to-end.
+The script ingests Cowrie JSON, prints summary statistics, and writes the visualisations to [`results/`](results/).
 
 ---
 
@@ -240,3 +235,4 @@ Portfolio: [harryklrr.github.io](https://harryklrr.github.io) · GitHub: [@Harry
 ## License
 
 Released under the [MIT License](LICENSE).
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
